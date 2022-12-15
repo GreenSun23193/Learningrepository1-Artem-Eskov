@@ -8,6 +8,7 @@
   "main": "my-script.js",
   "scripts": {
     "test": "test"
+    "start": "nodemon my-script.js"
   },
   "repository": {
     "type": "git",
