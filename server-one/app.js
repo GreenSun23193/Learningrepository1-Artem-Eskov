@@ -19,3 +19,5 @@ app.get('/catinfo', (req, res) => {
   };
   res.json(cat);
 });
+
+console.log(`server run at http://localhost:3000`)
