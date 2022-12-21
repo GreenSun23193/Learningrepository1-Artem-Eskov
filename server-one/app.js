@@ -20,4 +20,10 @@ app.get('/catinfo', (req, res) => {
   res.json(cat);
 });
 
+app.set('view engine', 'pug');
+
+app.get('/', (req, res) => {
+  res.render('index', { title: 'Title', heading: 'Click on the cat', name: 'Name', age: 'Age: 7', weight: 'Weight 5kg' })
+});
+
 console.log(`server run at http://localhost:3000`)
