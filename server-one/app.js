@@ -27,4 +27,16 @@ app.get('/', (req, res) => {
   res.render('index.pug', { title: 'Title', heading: 'Click on the cat', name: 'Name', age: 'Age: 7', weight: 'Weight 5kg' })
 })
 
+app.post('/cat', (req, res) => {
+  res.send('With this endpoint you can add cats.')
+})
+
+app.put('/cat', (req, res) => {
+  res.send('With this endpoint you can edit cats.')
+})
+
+app.delete('/cat', (req, res) => {
+  res.send('With this endpoint you can delete cats.')
+})
+
 console.log(`server run at http://localhost:3000`)
