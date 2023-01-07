@@ -14,7 +14,7 @@ router1.get('/catinfo', (req, res) => {
   res.json(cat);
 });
 
-router1.set('view engine', 'pug')
+//router1.set('view engine', 'pug')
 
 router1.get('/', (req, res) => {
   res.render('index.pug', { title: 'Title', heading: 'Click on the cat', name: 'Name', age: 'Age: 7', weight: 'Weight 5kg' })
@@ -36,11 +36,8 @@ router1.delete('/cat', (req, res) => {
   res.send('With this endpoint you can delete cats.')
 })
 
-//const catModel = require('../models/catModel.js');
-//const catModel = require('C:/Users/Artem/wop-assignments/server-one/catModel.js');
-//const catModel = require('..wop-assignments/server-one/catModel.js');
-//const catModel = require('.wop-assignments/server-one/catModel.js');
-const catModel = require('./models/catModel.js');
+
+const catModel = require('../models/catModel.js');
 
 
 const cats = catModel.cats;
@@ -48,5 +45,11 @@ const cats = catModel.cats;
 router1.get('/cat/:id', (req, res) => {
   res.send("You requested a cat whose id is " + req.params.id)
 })
+
+const catController = require('../controllers/catController.js');
+
+router1.get('/catcontroller', catController.cat_list_get_old);
+
+router1.get('/catcontroller/:id', catController.cat_list_get);
 
 module.exports = router1
