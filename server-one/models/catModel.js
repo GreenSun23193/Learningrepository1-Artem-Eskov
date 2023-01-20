@@ -1,4 +1,4 @@
-'use strict';
+/*'use strict';
 const cats = [
   {
     id: '1',
@@ -20,4 +20,43 @@ const cats = [
 
 module.exports = {
   cats,
+};*/
+'use strict';
+const pool = require('../database/db');
+const promisePool = pool.promise();
+
+const getAllCats = async () => {
+  try {
+    // TODO: do the LEFT (or INNER) JOIN to get owner's name as ownername (from wop_user table).
+    const [rows] = await promisePool.query('SELECT * FROM wop_cat;');
+    return rows;
+  } catch (e) {
+    console.error('error', e.message);
+  }
+};
+
+const getCat = async (id) => {
+  try {
+    const [rows] = await promisePool.query('SELECT * FROM wop_cat WHERE cat_id = ' + id + ';');
+    return rows;
+  } catch (e) {
+    console.error('error', e.message);
+  }
+};
+
+const addCat = async (catname, catbirthdate, catweight, catowner, catfilename) => {
+  try {
+    console.log('Insert into wop_cat (name, birthdate, weight, owner, filename) values ("' + catname +'", "' + catbirthdate + '", "' + catweight + '", "' + catowner + '", "' + catfilename + '");');
+    const [rows] = await promisePool.query('Insert into wop_cat (name, birthdate, weight, owner, filename) values ("' + catname +'", "' + catbirthdate + '", "' + catweight + '", "' + catowner + '", "' + catfilename + '");');
+    return rows;
+  } catch (e) {
+    console.error('error', e.message);
+  }
+};
+
+
+module.exports = {
+  getAllCats,
+  getCat,
+  addCat,
 };

@@ -56,12 +56,17 @@ router1.get('/catcontroller/:id', catController.cat_list_get);*/
 
 //router1.get('/cat', catController.cat_list_get_old);
 
-router1.get('/cat/:id', catController.cat_list_get);
+//router1.get('/cat/:id', catController.cat_list_get);
 
 //router1.post('/cat', catController.cat_list_get_old);
 
-router1.post('/cat/:id', catController.cat_list_get);
+//router1.post('/cat/:id', catController.cat_list_get);
+
+router1.get('/cat/:id', catController.cat_get);
+router1.post('/cat/:id', catController.cat_get);
 
 router1.post('/cat', upload.single('cat'), catController.cat_post);
+
+router1.get('/cat', catController.cat_list_get);
 
 module.exports = router1

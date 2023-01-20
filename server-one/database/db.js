@@ -1,6 +1,7 @@
 'use strict';
 const mysql = require('mysql2');
 require('dotenv').config();
+console.log(process.env)
 
 const pool = mysql.createPool({
   host: process.env.DB_HOST,
