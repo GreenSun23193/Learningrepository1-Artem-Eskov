@@ -43,13 +43,33 @@ const cat_list_change = (cats) => {
 
 const cat_list_get = async (req, res) => {
   const cats = await catModel.getAllCats();
+
+  /*console.log("cats------------------------");
+  console.log(cats);
+  console.log("cats.filename------------------------");
+  console.log(cats.filename);
+  console.log("cats.path------------------------");
+  console.log(cats.path);*/
+
+  //cats.filename = cats.path;
+
+  /*console.log("new cats------------------------");
+  console.log(cats);
+  console.log("new cats.filename------------------------");
+  console.log(cats.filename);
+  console.log("new cats.path------------------------");
+  console.log(cats.path);*/
+
   res.json(cats);
 };
 
 const cat_post = (req, res, next) => {
+
   console.log(req.file);
   console.log(req.body);
   catModel.addCat(req.body.name, req.body.birthdate, req.body.weight, req.body.owner, req.file.filename)
+  //console.log("req------------------------");
+  //console.log(req);
 };
 
 module.exports = {

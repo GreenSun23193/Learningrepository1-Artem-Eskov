@@ -46,8 +46,11 @@ const getCat = async (id) => {
 
 const addCat = async (catname, catbirthdate, catweight, catowner, catfilename) => {
   try {
+    console.log("ROWSROWSROWSROWSROWSROWSROWSROWSROWSROWSROWS2");
     console.log('Insert into wop_cat (name, birthdate, weight, owner, filename) values ("' + catname +'", "' + catbirthdate + '", "' + catweight + '", "' + catowner + '", "' + catfilename + '");');
-    const [rows] = await promisePool.query('Insert into wop_cat (name, birthdate, weight, owner, filename) values ("' + catname +'", "' + catbirthdate + '", "' + catweight + '", "' + catowner + '", "' + catfilename + '");');
+    const [rows] = await promisePool.query('Insert into wop_cat (name, birthdate, weight, owner, filename) values ("' + catname +'", "' + catbirthdate + '", "' + catweight + '", "' + catowner + '", "uploads/' + catfilename + '");');
+    //console.log("ROWSROWSROWSROWSROWSROWSROWSROWSROWSROWSROWS");
+    //console.log(rows);
     return rows;
   } catch (e) {
     console.error('error', e.message);
