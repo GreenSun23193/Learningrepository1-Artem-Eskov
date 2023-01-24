@@ -29,47 +29,27 @@ const cat_list_get = (req, res) => {
   res.json(cat_list_get0(req.params.id));
 };*/
 
-const cat_list_change = (cats) => {
-  var new_cats = document.createElement('new_cats');
-  cats.forEach((cat) => {
-    const option = document.createElement('option');
-    option.value = user.user_id;
-    option.innerHTML = user.name;
-    option.classList.add('light-border');
-    userList.appendChild(option);
-  });
-};
-
-
 const cat_list_get = async (req, res) => {
   const cats = await catModel.getAllCats();
-
-  /*console.log("cats------------------------");
-  console.log(cats);
-  console.log("cats.filename------------------------");
-  console.log(cats.filename);
-  console.log("cats.path------------------------");
-  console.log(cats.path);*/
-
-  //cats.filename = cats.path;
-
-  /*console.log("new cats------------------------");
-  console.log(cats);
-  console.log("new cats.filename------------------------");
-  console.log(cats.filename);
-  console.log("new cats.path------------------------");
-  console.log(cats.path);*/
-
   res.json(cats);
 };
 
 const cat_post = (req, res, next) => {
-
   console.log(req.file);
   console.log(req.body);
-  catModel.addCat(req.body.name, req.body.birthdate, req.body.weight, req.body.owner, req.file.filename)
-  //console.log("req------------------------");
-  //console.log(req);
+  //catModel.addCat(req.body.name, req.body.birthdate, req.body.weight, req.body.owner, req.file.filename)
+
+  catModel.addCat(req.body.name, req.body.birthdate, req.body.weight, req.body.ownername, req.file.filename)
+};
+
+const cat_put = (req, res, next) => {
+  //console.log(req.file);
+  console.log(req.body);
+  //catModel.changeCat(req.body.name, req.body.birthdate, req.body.weight, req.body.owner, req.file.cat_id)
+  //catModel.changeCat(req.body.name, req.body.birthdate, req.body.weight, req.body.owner, req.body.cat_id)
+  
+  catModel.changeCat(req.body.name, req.body.birthdate, req.body.weight, req.body.owner, req.body.id)
+  res.json({message: 'Cat changed!'});
 };
 
 module.exports = {
@@ -77,6 +57,7 @@ module.exports = {
   //cat_list_get_old,
   cat_post,
   cat_get,
+  cat_put,
   //upload
 };
 

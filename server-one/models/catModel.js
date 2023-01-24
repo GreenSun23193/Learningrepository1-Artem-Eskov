@@ -38,7 +38,7 @@ const getAllCats = async () => {
 const getCat = async (id) => {
   try {
     const [rows] = await promisePool.query('SELECT * FROM wop_cat WHERE cat_id = ' + id + ';');
-    return rows;
+    return rows[0];
   } catch (e) {
     console.error('error', e.message);
   }
@@ -46,12 +46,19 @@ const getCat = async (id) => {
 
 const addCat = async (catname, catbirthdate, catweight, catowner, catfilename) => {
   try {
-    console.log("ROWSROWSROWSROWSROWSROWSROWSROWSROWSROWSROWS2");
-    console.log('Insert into wop_cat (name, birthdate, weight, owner, filename) values ("' + catname +'", "' + catbirthdate + '", "' + catweight + '", "' + catowner + '", "' + catfilename + '");');
-    const [rows] = await promisePool.query('Insert into wop_cat (name, birthdate, weight, owner, filename) values ("' + catname +'", "' + catbirthdate + '", "' + catweight + '", "' + catowner + '", "uploads/' + catfilename + '");');
-    //console.log("ROWSROWSROWSROWSROWSROWSROWSROWSROWSROWSROWS");
-    //console.log(rows);
-    return rows;
+    const [rows] = await promisePool.query('Insert into wop_cat (name, birthdate, weight, owner, filename) values ("' + catname +'", "' + catbirthdate + '", "' + catweight + '", "' + catowner + '", "' + catfilename + '");');
+    return rows[0];
+  } catch (e) {
+    console.error('error', e.message);
+  }
+};
+
+const changeCat = async (catname, catbirthdate, catweight, catowner, catid) => {
+  try {
+    console.log('Update wop_cat (name, birthdate, weight, owner) values ("' + catname +'", "' + catbirthdate + '", "' + catweight + '", "' + catowner + '") where id = ' + catid + ';');
+    //const [rows] = await promisePool.query('Update wop_cat (name, birthdate, weight, owner) values ("' + catname +'", "' + catbirthdate + '", "' + catweight + '", "' + catowner + '") where id = ' + catid + ';');
+    const [rows] = await promisePool.query('Update wop_cat set name="'+ catname +'", birthdate="'+ catbirthdate +'", weight="'+ catweight +'", owner="'+ catowner +'" where cat_id = '+ catid +';');
+    return rows[0];
   } catch (e) {
     console.error('error', e.message);
   }
@@ -62,4 +69,5 @@ module.exports = {
   getAllCats,
   getCat,
   addCat,
+  changeCat,
 };

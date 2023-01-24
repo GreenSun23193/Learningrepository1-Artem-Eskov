@@ -22,6 +22,7 @@ app.listen(port, () => {
 })
 
 app.use(express.static('public'));
+app.use(express.static('uploads'));
 app.get('/catinfo', (req, res) => {
   const cat = {
     name: 'Frank',
@@ -73,6 +74,7 @@ app.get('/cat/:id', (req, res) => {
 app.set('view engine', 'pug')
 
 app.use(express.static('public'));
+app.use(express.static('uploads'));
 
 const router2 = require('./routes/catRoute.js')
 

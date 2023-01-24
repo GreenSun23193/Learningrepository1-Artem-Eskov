@@ -28,9 +28,9 @@ router1.get('/', (req, res) => {
   res.send('With this endpoint you can add cats.')
 })*/
 
-router1.put('/cat', (req, res) => {
+/*router1.put('/cat', (req, res) => {
   res.send('With this endpoint you can edit cats.')
-})
+})*/
 
 router1.delete('/cat', (req, res) => {
   res.send('With this endpoint you can delete cats.')
@@ -68,5 +68,7 @@ router1.post('/cat/:id', catController.cat_get);
 router1.post('/cat', upload.single('cat'), catController.cat_post);
 
 router1.get('/cat', catController.cat_list_get);
+
+router1.put('/cat', catController.cat_put);
 
 module.exports = router1
