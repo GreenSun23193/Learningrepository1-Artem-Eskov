@@ -37,7 +37,10 @@ const getAllCats = async () => {
 
 const getCat = async (id) => {
   try {
-    const [rows] = await promisePool.query('SELECT * FROM wop_cat WHERE cat_id = ' + id + ';');
+    //const [rows] = await promisePool.query('SELECT * FROM wop_cat WHERE cat_id = ' + id + ';');
+
+    const [rows] = await promisePool.query('SELECT wop_cat.* , wop_user.user_id as ownername FROM wop_cat inner join wop_user on wop_cat.owner = wop_user.user_id WHERE cat_id = ' + id + ';');
+
     return rows[0];
   } catch (e) {
     console.error('error', e.message);
@@ -57,7 +60,9 @@ const changeCat = async (catname, catbirthdate, catweight, catowner, catid) => {
   try {
     console.log('Update wop_cat (name, birthdate, weight, owner) values ("' + catname +'", "' + catbirthdate + '", "' + catweight + '", "' + catowner + '") where id = ' + catid + ';');
     //const [rows] = await promisePool.query('Update wop_cat (name, birthdate, weight, owner) values ("' + catname +'", "' + catbirthdate + '", "' + catweight + '", "' + catowner + '") where id = ' + catid + ';');
+
     const [rows] = await promisePool.query('Update wop_cat set name="'+ catname +'", birthdate="'+ catbirthdate +'", weight="'+ catweight +'", owner="'+ catowner +'" where cat_id = '+ catid +';');
+
     return rows[0];
   } catch (e) {
     console.error('error', e.message);
