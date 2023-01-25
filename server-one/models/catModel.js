@@ -39,7 +39,7 @@ const getCat = async (id) => {
   try {
     //const [rows] = await promisePool.query('SELECT * FROM wop_cat WHERE cat_id = ' + id + ';');
 
-    const [rows] = await promisePool.query('SELECT wop_cat.* , wop_user.user_id as ownername FROM wop_cat inner join wop_user on wop_cat.owner = wop_user.user_id WHERE cat_id = ' + id + ';');
+    const [rows] = await promisePool.query('SELECT wop_cat.* , wop_user.name as ownername FROM wop_cat inner join wop_user on wop_cat.owner = wop_user.user_id WHERE cat_id = ' + id + ';');
 
     return rows[0];
   } catch (e) {
