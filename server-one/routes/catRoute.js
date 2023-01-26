@@ -69,6 +69,8 @@ router1.post('/cat', upload.single('cat'), catController.cat_post);
 
 router1.get('/cat', catController.cat_list_get);
 
-router1.put('/cat', catController.cat_put);
+router1.put('/cat', catController.cat_update_put);
+
+router1.delete('/cat/:id', catController.cat_delete);
 
 module.exports = router1

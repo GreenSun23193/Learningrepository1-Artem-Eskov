@@ -37,19 +37,19 @@ const cat_list_get = async (req, res) => {
 const cat_post = (req, res, next) => {
   console.log(req.file);
   console.log(req.body);
-  //catModel.addCat(req.body.name, req.body.birthdate, req.body.weight, req.body.owner, req.file.filename)
-
-  catModel.addCat(req.body.name, req.body.birthdate, req.body.weight, req.body.ownername, req.file.filename)
+  catModel.addCat(req.body.name, req.body.birthdate, req.body.weight, req.body.owner, req.file.filename)
 };
 
-const cat_put = (req, res, next) => {
-  //console.log(req.file);
-  console.log(req.body);
-  //catModel.changeCat(req.body.name, req.body.birthdate, req.body.weight, req.body.owner, req.file.cat_id)
-  //catModel.changeCat(req.body.name, req.body.birthdate, req.body.weight, req.body.owner, req.body.cat_id)
-  
+const cat_update_put = (req, res, next) => {
+  console.log(req.body); 
   catModel.changeCat(req.body.name, req.body.birthdate, req.body.weight, req.body.owner, req.body.id)
   res.json({message: 'Cat changed!'});
+};
+
+const cat_delete = (req, res, next) => {
+  console.log(req.file);
+  console.log(req.body);
+  catModel.deleteCat(req.body.id)
 };
 
 module.exports = {
@@ -57,7 +57,8 @@ module.exports = {
   //cat_list_get_old,
   cat_post,
   cat_get,
-  cat_put,
+  cat_update_put,
+  cat_delete,
   //upload
 };
 

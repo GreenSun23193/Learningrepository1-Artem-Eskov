@@ -28,7 +28,9 @@ const promisePool = pool.promise();
 const getAllCats = async () => {
   try {
     // TODO: do the LEFT (or INNER) JOIN to get owner's name as ownername (from wop_user table).
-    const [rows] = await promisePool.query('SELECT * FROM wop_cat;');
+    //const [rows] = await promisePool.query('SELECT * FROM wop_cat;');
+
+    const [rows] = await promisePool.query('SELECT wop_cat.* , wop_user.name as ownername FROM wop_cat inner join wop_user on wop_cat.owner = wop_user.user_id;');
     return rows;
   } catch (e) {
     console.error('error', e.message);
@@ -37,10 +39,7 @@ const getAllCats = async () => {
 
 const getCat = async (id) => {
   try {
-    //const [rows] = await promisePool.query('SELECT * FROM wop_cat WHERE cat_id = ' + id + ';');
-
-    const [rows] = await promisePool.query('SELECT wop_cat.* , wop_user.name as ownername FROM wop_cat inner join wop_user on wop_cat.owner = wop_user.user_id WHERE cat_id = ' + id + ';');
-
+    const [rows] = await promisePool.query('SELECT * FROM wop_cat WHERE cat_id = ' + id + ';');
     return rows[0];
   } catch (e) {
     console.error('error', e.message);
@@ -58,11 +57,16 @@ const addCat = async (catname, catbirthdate, catweight, catowner, catfilename) =
 
 const changeCat = async (catname, catbirthdate, catweight, catowner, catid) => {
   try {
-    console.log('Update wop_cat (name, birthdate, weight, owner) values ("' + catname +'", "' + catbirthdate + '", "' + catweight + '", "' + catowner + '") where id = ' + catid + ';');
-    //const [rows] = await promisePool.query('Update wop_cat (name, birthdate, weight, owner) values ("' + catname +'", "' + catbirthdate + '", "' + catweight + '", "' + catowner + '") where id = ' + catid + ';');
-
     const [rows] = await promisePool.query('Update wop_cat set name="'+ catname +'", birthdate="'+ catbirthdate +'", weight="'+ catweight +'", owner="'+ catowner +'" where cat_id = '+ catid +';');
+    return rows[0];
+  } catch (e) {
+    console.error('error', e.message);
+  }
+};
 
+const deleteCat = async (catid) => {
+  try {
+    const [rows] = await promisePool.query('Delete from wop_cat WHERE cat_id = ' + catid + ';');
     return rows[0];
   } catch (e) {
     console.error('error', e.message);
@@ -75,4 +79,5 @@ module.exports = {
   getCat,
   addCat,
   changeCat,
+  deleteCat,
 };
