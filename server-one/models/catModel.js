@@ -67,12 +67,11 @@ const changeCat = async (catname, catbirthdate, catweight, catowner, catid) => {
 const deleteCat = async (catid) => {
   try {
     const [rows] = await promisePool.query('Delete from wop_cat WHERE cat_id = ' + catid + ';');
-    return rows[0];
+    return "done";
   } catch (e) {
     console.error('error', e.message);
   }
 };
-
 
 module.exports = {
   getAllCats,
