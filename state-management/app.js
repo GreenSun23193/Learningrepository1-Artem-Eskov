@@ -3,6 +3,16 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
+const passport = require('./utils/pass');
+
+const loggedIn = (req, res, next) => {
+  if (req.user) {
+    next();
+  } else {
+    res.redirect('/form');
+  }
+};
+
 const username = 'foo';
 const password = 'bar';
 
@@ -46,39 +56,23 @@ var session = require('express-session')
 
 app.use(session({ secret: 'secretkey1', cookie: { secure: true }}))
 
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.get('/form', function(req, res, next) {
   res.setHeader('Content-Type', 'text/html')
   res.render("form");
 })
 
-app.get('/secret', function(req, res, next) {
-  if (req.logged==false){
-    res.redirect('/form')
-  }
-  res.setHeader('Content-Type', 'text/html')
-  res.render("secret");
-})
+app.get('/secret', loggedIn, (req, res) => {
+  res.render('secret');
+});
 
-app.post('/login', function(req, res, next) {
-  console.log("req")
-  console.log(req.body);
-  console.log("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
-
-  console.log("req.body.username: " + req.body.username)
-  console.log("username: " + username)
-
-  console.log("req.body.password: " + req.body.password)
-  console.log("password: " + password)
-
-  if (req.body.username == username && req.body.password == password) {
-    var logged =  true;
-    res.redirect('/secret')
-  }
-  else {
-    var logged = false;
-    res.redirect('/form')
-  }
-
-})
+app.post('/login',
+    passport.authenticate('local', {failureRedirect: '/form'}),
+    (req, res) => {
+      console.log('success');
+      res.redirect('/secret');
+    });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
