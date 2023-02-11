@@ -40,27 +40,70 @@
     // *****************
     
    // serialize: store user id in session 
+
+   passport.serializeUser(function(user, done) {
+    process.nextTick(function() {
+      return done(null, {
+        id: users.user_id
+      });
+    });
+  });
+
    passport.serializeUser((id, done) => {
      console.log('serialize', id);
      // serialize user id by adding it to 'done()' callback
+
+     done(null, id);
+
+
    });
    
    // deserialize: get user id from session and get all user data
    passport.deserializeUser(async (id, done) => {
        // get user data by id from getUser
+
+       var user = getUser(id);
+
        console.log('deserialize', user);
        // deserialize user by adding it to 'done()' callback
+
+       done(err, user);
    });
    
    passport.use(new Strategy(
        (username, password, done) => {
          // get user by username from getUserLogin
+
+         var userByEmail = getUserLogin(username);
+
          // if user is undefined
+
+         if (userByEmail == undefined) {
+
+
          // return done(null, false);
+
+         return done(null, false);
+        }
+
          // if passwords dont match
+
+         else if (userByEmail.password != password) {
+
          // return done(null, false);
+
+         return done(null, false);
+        }
+
          // if all is ok
+
+         else {
          // return done(null, user.user_id);
+
+
+         return done(null, userByEmail.user_id);
+
+        }
        }
    ));
    
