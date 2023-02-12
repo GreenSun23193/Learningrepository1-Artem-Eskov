@@ -76,7 +76,8 @@ app.post('/login',
     res.redirect('/secret');
   });
 
-  app.post('/logout', function(req, res, next){
+  //I use get instead of post because it makes it easier to test it
+  app.get('/logout', function(req, res, next){
     req.logout(function(err) {
       if (err) { return next(err); }
       res.redirect('/');
