@@ -5,14 +5,6 @@ const port = 3000;
 
 const passport = require('./utils/pass');
 
-const loggedIn = (req, res, next) => {
-  if (req.user) {
-    next();
-  } else {
-    res.redirect('/form');
-  }
-};
-
 const username = 'foo';
 const password = 'bar';
 
@@ -54,10 +46,19 @@ app.get('/deleteCookie', (req, res) => {
 
 var session = require('express-session')
 
-app.use(session({ secret: 'secretkey1', cookie: { secure: true }}))
+app.use(session({ secret: 'secretkey1', resave: false, saveUninitialized: false, cookie: { secure: false }}))
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+const loggedIn = (req, res, next) => {
+  console.log(req.user);
+  if (req.user) {
+    next();
+  } else {
+    res.redirect('/form');
+  }
+};
 
 app.get('/form', function(req, res, next) {
   res.setHeader('Content-Type', 'text/html')
@@ -69,10 +70,17 @@ app.get('/secret', loggedIn, (req, res) => {
 });
 
 app.post('/login',
-    passport.authenticate('local', {failureRedirect: '/form'}),
-    (req, res) => {
-      console.log('success');
-      res.redirect('/secret');
+  passport.authenticate('local', {failureRedirect: '/form'}),
+  (req, res) => {
+    console.log('success');
+    res.redirect('/secret');
+  });
+
+  app.post('/logout', function(req, res, next){
+    req.logout(function(err) {
+      if (err) { return next(err); }
+      res.redirect('/');
     });
+  });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
