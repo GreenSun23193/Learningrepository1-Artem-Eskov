@@ -5,15 +5,18 @@ const routerUserRoute = express.Router()
 
 const { body } = require('express-validator');
 
+//Ascend
 routerUserRoute.use(express.static('public'));
 
 const userController = require('../controllers/userController.js');
 
-routerUserRoute.route('/user/:id')
+router.get('/token', checkToken);
+
+routerUserRoute.route('/:id')
   .get(userController.user_get)
   .post(userController.user_get);
 
-  routerUserRoute.route('/user')
+  routerUserRoute.route('/')
   .get(userController.user_list_get)
   .post(
     [

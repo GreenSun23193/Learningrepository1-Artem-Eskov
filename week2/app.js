@@ -18,9 +18,18 @@ const routerAppCat = require('./routes/catRoute.js')
 
 const routerAppUser = require('./routes/userRoute.js')
 
+const passport = require('./utils/pass.js');
+const authRoute = require('./routes/authRoute.js');
+
+app.use(passport.initialize());
+app.use('/auth', authRoute);
+
 app.use('/', routerAppCat)
 
-app.use('/', routerAppUser)
+// app.use('/', routerAppUser)
+
+//app.use('/auth', auth);
+app.use('/user', passport.authenticate('jwt', {session: false}), routerAppUser);
 
 app.listen(port, () => {
   console.log()

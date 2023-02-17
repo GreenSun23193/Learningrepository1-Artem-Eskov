@@ -19,11 +19,20 @@ const user_get = async (req, res) => {
   res.json(ret);
 };
 
+const checkToken = (req, res, next) => {
+  if (!req.user) {
+    next(new Error('token not valid'));
+  } else {
+    res.json({ user: req.user });
+  }
+ };
+
 const user_list_get_old = (req, res) => {
     res.json(users);
 };
 
 const user_list_get = async (req, res) => {
+  console.log("listget");
   const users = await userModel.getAllUsers();
   res.json(users);
 };
@@ -49,4 +58,5 @@ module.exports = {
     user_list_get_old,
     user_post,
     user_get,
+    checkToken,
 };
