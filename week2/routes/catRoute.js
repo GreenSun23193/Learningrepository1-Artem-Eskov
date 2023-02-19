@@ -30,7 +30,7 @@ const cats = catModel.cats;
 
 const catController = require('../controllers/catController.js');
 
-routerCatRoute.route('/cat')
+routerCatRoute.route('/')
   .get(catController.cat_list_get)
   .delete((req, res) => {
     res.send('With this endpoint you can delete cats.')
@@ -41,8 +41,7 @@ routerCatRoute.route('/cat')
       body('name').not().isEmpty().trim().escape(),
       body('birthdate').not().isEmpty().toDate(),
       body('weight').not().isEmpty().isDecimal(),
-      body('owner').not().isEmpty().isInt({ min: 0 }),
-      //file('filename').not().isEmpty().trim().escape()
+      //body('owner').not().isEmpty().isInt({ min: 0 }),
       check('filename').custom((value, {req}) => {
         if(req.file.filename != ''){
             return true;
@@ -53,32 +52,47 @@ routerCatRoute.route('/cat')
 
     ],
     catController.cat_post
-  )
-  .put(
-    upload.single('cat'), 
+  );
+
+//routerCatRoute.route('/cat')
+/*
+function putcheck (req, body) {
+  console.log(req.user);
+  if (req.user.user_role == 0) {
     [
       body('name').not().isEmpty().trim().escape(),
       body('birthdate').not().isEmpty().toDate(),
       body('weight').not().isEmpty().isDecimal(),
       body('owner').not().isEmpty().isInt()
 
+    ]
+  }
+  else {
+    [
+      body('name').not().isEmpty().trim().escape(),
+      body('birthdate').not().isEmpty().toDate(),
+      body('weight').not().isEmpty().isDecimal(),
+    ]
+  }
+}
+*/
+routerCatRoute.route('/:id')
+  .get(catController.cat_get)
+  .post(catController.cat_get)
+  .delete(catController.cat_delete)
+  .put(
+    upload.single('cat'), 
+    [
+      body('name').not().isEmpty().trim().escape(),
+      body('birthdate').not().isEmpty().toDate(),
+      body('weight').not().isEmpty().isDecimal(),
+      body('owner').optional().isInt()
     ],
     catController.cat_update_put);
 
-//routerCatRoute.route('/cat')
+//routerCatRoute.use('/cat', passport.authenticate('jwt', {session: false}), routerCatRoute);
 
-
-routerCatRoute.route('/cat/:id')
-  .get(catController.cat_get)
-  .post(catController.cat_get)
-  .delete(catController.cat_delete);
-
-routerCatRoute.route('/')
-  .get((req, res) => {
-    res.render('index.pug', { title: 'Title', heading: 'Click on the cat', name: 'Name', age: 'Age: 7', weight: 'Weight 5kg' })
-  });
-
-routerCatRoute.route('/catinfo')
+/*routerCatRoute.route('/catinfo')
   .get((req, res) => {
     const cat = {
       name: 'Frank',
@@ -86,6 +100,6 @@ routerCatRoute.route('/catinfo')
       weight: 5,
     };
     res.json(cat);
-  });
+  });*/
 
 module.exports = routerCatRoute

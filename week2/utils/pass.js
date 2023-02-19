@@ -44,11 +44,12 @@ function (jwtPayload, done) {
     //find the user in db if needed. This functionality may be omitted if you store everything you'll need in JWT payload.
     return getUser(jwtPayload.user_id)
         .then(user => {
-            console.log("111");
+            console.log("user logged on well " + jwtPayload.user_id);
             return done(null, user);
         })
         .catch(err => {
-            console.log("112");
+            console.log("error getting user");
+            console.log(err);
             return done(err);
         });
 }

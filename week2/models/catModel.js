@@ -29,21 +29,38 @@ const addCat = async (catname, catbirthdate, catweight, catowner, catfilename) =
   }
 };
 
-const changeCat = async (catname, catbirthdate, catweight, catowner, catid) => {
-  try {
-    const [rows] = await promisePool.execute('Update wop_cat set name=?, birthdate=?, weight=?, owner=? where cat_id = ?;', [catname, catbirthdate, catweight, catowner, catid]);
-    return rows[0];
-  } catch (e) {
-    console.error('error', e.message);
+const changeCat = async (catname, catbirthdate, catweight, catowner, catid, catownerCurrent, userid, userrole) => {
+  console.log("IF NOT PASSED");
+  if (catownerCurrent == userid || userrole == 0) {
+    console.log("IF PASSED");
+    try {
+      if (userrole == 0) {
+        const [rows] = await promisePool.execute('Update wop_cat set name=?, birthdate=?, weight=?, owner=? where cat_id = ?;', [catname, catbirthdate, catweight, catowner, catid]);
+      }
+      else {
+        const [rows] = await promisePool.execute('Update wop_cat set name=?, birthdate=?, weight=? where cat_id = ?;', [catname, catbirthdate, catweight, catid]);
+      }
+      return rows[0];
+    } catch (e) {
+      console.error('error', e.message);
+    }
+  }
+  else {
+    console.log("ELSE PASSED");
+    return "not done";
   }
 };
 
-const deleteCat = async (catid) => {
-  try {
-    const [rows] = await promisePool.execute('Delete from wop_cat WHERE cat_id = ?;', [catid]);
-    return "done";
-  } catch (e) {
-    console.error('error', e.message);
+const deleteCat = async (catid, catowner, userid, userrole) => {
+  if (catowner == userid || userrole == 0) {
+    try {
+      const [rows] = await promisePool.execute('Delete from wop_cat WHERE cat_id = ?;', [catid]);
+      return "done";
+    } catch (e) {
+    }
+  }
+  else {
+    return "not done";
   }
 };
 

@@ -10,7 +10,7 @@ routerUserRoute.use(express.static('public'));
 
 const userController = require('../controllers/userController.js');
 
-routerUserRoute.get('/token', checkToken);
+routerUserRoute.get('/token', userController.checkToken);
 
 routerUserRoute.route('/:id')
   .get(userController.user_get)

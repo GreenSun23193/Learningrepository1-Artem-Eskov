@@ -11,7 +11,7 @@ const user_get = async (req, res) => {
   if (!errors.isEmpty())
   {
     console.log(errors);
-    return res.status(500).json({message: "bad cat"});
+    return res.status(500).json({message: "bad user"});
   }
 
   const ret = await userModel.getUser(req.params.id);
@@ -23,7 +23,7 @@ const checkToken = (req, res, next) => {
   if (!req.user) {
     next(new Error('token not valid'));
   } else {
-    res.json({ user: req.user });
+    res.json({ user: req.user[0] });
   }
  };
 

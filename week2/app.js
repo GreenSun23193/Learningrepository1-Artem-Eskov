@@ -21,15 +21,25 @@ const routerAppUser = require('./routes/userRoute.js')
 const passport = require('./utils/pass.js');
 const authRoute = require('./routes/authRoute.js');
 
+routerAppCat.route('/')
+  .get((req, res) => {
+    res.render('index.pug', { title: 'Title', heading: 'Click on the cat', name: 'Name', age: 'Age: 7', weight: 'Weight 5kg' })
+  });
+
+/*app.get('/', (req, res) => {
+  res.render('index.pug', { title: 'Title', heading: 'Click on the cat', name: 'Name', age: 'Age: 7', weight: 'Weight 5kg' })
+});*/
+
 app.use(passport.initialize());
 app.use('/auth', authRoute);
 
-app.use('/', routerAppCat)
+//app.use('/', routerAppCat)
 
 // app.use('/', routerAppUser)
 
 //app.use('/auth', auth);
 app.use('/user', passport.authenticate('jwt', {session: false}), routerAppUser);
+app.use('/cat', passport.authenticate('jwt', {session: false}), routerAppCat);
 
 app.listen(port, () => {
   console.log()
