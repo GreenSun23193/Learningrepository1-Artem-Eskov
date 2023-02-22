@@ -29,15 +29,30 @@ const addCat = async (catname, catbirthdate, catweight, catowner, catfilename) =
   }
 };
 
-const changeCat = async (catname, catbirthdate, catweight, catowner, catid, catownerCurrent, userid, userrole) => {
+//const changeCat = async (catname, catbirthdate, catweight, catowner, catid, catownerCurrent, userid, userrole) => {
+const changeCat = async (catname, catbirthdate, catweight, catid, catownerCurrent, userid, userrole) => {
   console.log("IF NOT PASSED");
+
+  console.log("catownerCurrent: ");
+  console.log(catownerCurrent);
+
+  console.log("userid: ");
+  console.log(userid);
+
+  console.log("userrole: ");
+  console.log(userrole);
+
+
+
   if (catownerCurrent == userid || userrole == 0) {
     console.log("IF PASSED");
     try {
       if (userrole == 0) {
+        console.log("RRRRRRRR It was userrole == 0");
         const [rows] = await promisePool.execute('Update wop_cat set name=?, birthdate=?, weight=?, owner=? where cat_id = ?;', [catname, catbirthdate, catweight, catowner, catid]);
       }
       else {
+        console.log("RRRRRRRR It was else");
         const [rows] = await promisePool.execute('Update wop_cat set name=?, birthdate=?, weight=? where cat_id = ?;', [catname, catbirthdate, catweight, catid]);
       }
       return rows[0];
