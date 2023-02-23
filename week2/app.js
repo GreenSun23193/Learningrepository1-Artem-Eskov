@@ -22,6 +22,8 @@ http.createServer((req, res) => {
 
 app.use(cors())
 
+app.use('/thumbnails', express.static('thumbnails'));
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 

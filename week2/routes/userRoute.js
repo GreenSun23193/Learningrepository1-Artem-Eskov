@@ -18,7 +18,7 @@ routerUserRoute.route('/:id')
 
   routerUserRoute.route('/')
   .get(userController.user_list_get)
-  .post(
+  /*.post(
     [
       body('name').not().isEmpty().trim().escape().isLength({ min: 3, max: undefined }),
       body('email').not().isEmpty().isEmail().normalizeEmail(),
@@ -27,6 +27,6 @@ routerUserRoute.route('/:id')
         minLowercase:0, minSymbols:0})
   
     ],
-    userController.user_post);
+    userController.user_post)*/;
 
 module.exports = routerUserRoute

@@ -2,6 +2,8 @@
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
 
+const { validationResult  } = require('express-validator');
+
 const login = (req, res) => {
   // TODO: add passport authenticate
   passport.authenticate('local', {session: false}, (err, user, info) => {
@@ -30,6 +32,41 @@ const login = (req, res) => {
 })(req, res);
 };
 
+const user_create_post = async (req, res, next) => {
+//const user_post = async (req, res, next) => {
+  // Extract the validation errors from a request.
+  const errors = validationResult(req); // TODO require validationResult, see userController
+
+  if (!errors.isEmpty()) {
+    console.log('user create error', errors);
+    console.log(req.body);
+    res.send(errors.array());
+  } else {
+    // TODO: bcrypt password
+
+    const params = [
+      req.body.name,
+      req.body.username,
+      bcrypt.hashSync(req.body.password) // TODO: save hash instead of the actual password
+    ];
+
+    const result = await addUser(params);
+    if (result.insertId) {
+      res.json({ message: `User added`, user_id: result.insertId });
+    } else {
+      res.status(400).json({error: 'register error'});
+    }
+  }
+};
+
+const logout = (req, res) => {
+  req.logout();
+  res.json({message: 'logout'});
+};
+
 module.exports = {
   login,
+  logout,
+  user_create_post,
+  //user_post,
 };

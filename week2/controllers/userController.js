@@ -39,7 +39,7 @@ const user_list_get = async (req, res) => {
 
 const { body, validationResult  } = require('express-validator');
 
-const user_post = (req, res, next) => {
+/*const user_post = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty())
   {
@@ -51,12 +51,12 @@ const user_post = (req, res, next) => {
   reply.message = "Hey ho!"
   res.json(reply)
   userModel.addUser(req.body.name, req.body.email, req.body.passwd)
-};
+};*/
 
 module.exports = {
     user_list_get,
     user_list_get_old,
-    user_post,
+    //user_post,
     user_get,
     checkToken,
 };
