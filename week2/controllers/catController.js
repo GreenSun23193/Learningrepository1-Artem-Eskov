@@ -2,6 +2,8 @@
 
 const catModel = require('../models/catModel.js');
 const resize = require('../utils/resize.js');
+const imageMeta = require('../utils/imageMeta.js');
+var ExifImage = require('exif').ExifImage;
 
 const cats = catModel.cats;
 
@@ -40,7 +42,6 @@ const cat_post = async (req, res, next) => {
     console.log('exif error', e);
     res.status(400).json({message: 'error'});
   }
-
 };
 
 const cat_update_put = async (req, res, next) => {
