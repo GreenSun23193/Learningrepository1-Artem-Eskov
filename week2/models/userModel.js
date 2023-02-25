@@ -32,7 +32,15 @@ const getUser = async (id) => {
   }
 };
 
-const addUser = async (username, useremail, userpassword) => {
+const addUser = async (params) => {
+  const username = params[0];
+  const useremail = params[1];
+  const userpassword = params[2];
+
+  console.log(username);
+  console.log(useremail);
+  console.log(userpassword);
+
   try {
     const [rows] = await promisePool.execute('Insert into wop_user (name, email, password) values (?, ?, ?);', [username, useremail, userpassword]);
     return rows;

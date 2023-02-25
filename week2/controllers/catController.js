@@ -1,6 +1,7 @@
 'use strict';
 
 const catModel = require('../models/catModel.js');
+const resize = require('../utils/resize.js');
 
 const cats = catModel.cats;
 
@@ -18,16 +19,28 @@ const cat_list_get = async (req, res) => {
 
 const { body, validationResult  } = require('express-validator');
 
-const cat_post = (req, res, next) => {
+const cat_post = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty())
   {
     console.log(errors);
     return res.status(500).json({message: "bad cat"});
   }
-  catModel.addCat(req.body.name, req.body.birthdate, req.body.weight, /*req.body.owner,*/ req.user[0].user_id, req.file.filename);
-  console.log("added a cat");
-  res.json({message :"cat added"})
+  try {
+    resize.makeThumbnail(req.file.path, "thumbnails/" + req.file.filename);
+
+    const coords = await imageMeta.getCoordinates(req.file.path);
+    console.log('coords', coords);
+
+    const cat = await catModel.addCat(req.body.name, req.body.birthdate, req.body.weight, /*req.body.owner,*/ req.user[0].user_id, req.file.filename, coords);
+    console.log("added a cat (controller)");
+    await res.json({message :"upload ok"})
+  }
+  catch (e) {
+    console.log('exif error', e);
+    res.status(400).json({message: 'error'});
+  }
+
 };
 
 const cat_update_put = async (req, res, next) => {

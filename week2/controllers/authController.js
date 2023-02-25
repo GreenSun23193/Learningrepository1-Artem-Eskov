@@ -1,6 +1,8 @@
 'use strict';
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
+const bcrypt = require('bcryptjs');
+const { addUser } = require('../models/userModel.js');
 
 const { validationResult  } = require('express-validator');
 
@@ -46,9 +48,11 @@ const user_create_post = async (req, res, next) => {
 
     const params = [
       req.body.name,
-      req.body.username,
-      bcrypt.hashSync(req.body.password) // TODO: save hash instead of the actual password
+      req.body.email,
+      bcrypt.hashSync(req.body.passwd) // TODO: save hash instead of the actual password
     ];
+
+    console.log(params);
 
     const result = await addUser(params);
     if (result.insertId) {
