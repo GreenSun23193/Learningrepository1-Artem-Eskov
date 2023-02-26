@@ -1,0 +1,21 @@
+'use strict';
+const url = 'https://localhost:8000';
+
+const addForm = document.querySelector('#addFileForm');
+const userList = document.querySelector('.add-owner');
+
+addForm.addEventListener('submit', async (evt) => {
+  evt.preventDefault();
+  const fd = new FormData(addForm);
+  const fetchOptions = {
+    method: 'POST',
+    headers: {
+      Authorization: 'Bearer ' + sessionStorage.getItem('token'),
+    },
+    body: fd,
+  };
+  const response = await fetch(url + '/file', fetchOptions);
+  const json = await response.json();
+  alert(json.message);
+  location.href = 'front.html';
+});
