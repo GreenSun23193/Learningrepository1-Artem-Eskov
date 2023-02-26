@@ -20,9 +20,18 @@ const getCat = async (id) => {
   }
 };
 
-const addCat = async (catname, catbirthdate, catweight, catowner, catfilename) => {
+const addCat = async (catname, catbirthdate, catweight, catowner, catfilename, catcoordinates) => {
   try {
-    const [rows] = await promisePool.execute('Insert into wop_cat (name, birthdate, weight, owner, filename) values (?, ?, ?, ?, ?);', [catname, catbirthdate, catweight, catowner, catfilename]);
+    console.log("adding cat from");
+    console.log(catcoordinates);
+    var rows = [];
+    if (catcoordinates == "") {
+      rows = await promisePool.execute('Insert into wop_cat (name, birthdate, weight, owner, filename) values (?, ?, ?, ?, ?);', [catname, catbirthdate, catweight, catowner, catfilename]);
+    }
+    else {
+      rows = await promisePool.execute('Insert into wop_cat (name, birthdate, weight, owner, filename, coords) values (?, ?, ?, ?, ?, ?);', 
+        [catname, catbirthdate, catweight, catowner, catfilename, "[" + catcoordinates.toString() + "]"]);
+    }
     return rows[0];
   } catch (e) {
     console.error('error', e.message);

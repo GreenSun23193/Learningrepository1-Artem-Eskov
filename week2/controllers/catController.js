@@ -25,6 +25,7 @@ const cat_post = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty())
   {
+    console.log("errors: ");
     console.log(errors);
     return res.status(500).json({message: "bad cat"});
   }
@@ -32,10 +33,10 @@ const cat_post = async (req, res, next) => {
     resize.makeThumbnail(req.file.path, "thumbnails/" + req.file.filename);
 
     const coords = await imageMeta.getCoordinates(req.file.path);
-    console.log('coords', coords);
+    console.log('OOOOOOOOOOOOOO coords', coords);
 
     const cat = await catModel.addCat(req.body.name, req.body.birthdate, req.body.weight, /*req.body.owner,*/ req.user[0].user_id, req.file.filename, coords);
-    console.log("added a cat (controller)");
+    //console.log("added a cat (controller)");
     await res.json({message :"upload ok"})
   }
   catch (e) {
