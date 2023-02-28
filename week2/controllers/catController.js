@@ -56,18 +56,18 @@ const cat_update_put = async (req, res, next) => {
   }
   const thisCat = await catModel.getCat(req.params.id);
   console.log("THISCAT PASSED");
-  if (req.user[0].user_role == 0) {
-  catModel.changeCat(req.body.name, req.body.birthdate, req.body.weight, req.body.owner, req.params.id, thisCat.owner, req.user[0].user_id, req.user[0].user_role)
+  if (req.user[0].role == 0) {
+  catModel.changeCat(req.body.name, req.body.birthdate, req.body.weight, req.body.owner, req.params.id, thisCat.owner, req.user[0].user_id, req.user[0].role)
   }
   else {
-  catModel.changeCat(req.body.name, req.body.birthdate, req.body.weight, req.params.id, thisCat.owner, req.user[0].user_id, req.user[0].user_role)
+  catModel.changeCat(req.body.name, req.body.birthdate, req.body.weight, "", req.params.id, thisCat.owner, req.user[0].user_id, req.user[0].role)
   }
   res.json({message: 'Cat changed!'});
 };
 
 const cat_delete = async (req, res, next) => {
   const thisCat = await catModel.getCat(req.params.id);
-  catModel.deleteCat(req.params.id, thisCat.owner, req.user[0].user_id, req.user[0].user_role)
+  catModel.deleteCat(req.params.id, thisCat.owner, req.user[0].user_id, req.user[0].role)
 };
 
 module.exports = {
@@ -77,4 +77,3 @@ module.exports = {
   cat_update_put,
   cat_delete,
 };
-

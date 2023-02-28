@@ -54,28 +54,6 @@ routerCatRoute.route('/')
     catController.cat_post
   );
 
-//routerCatRoute.route('/cat')
-/*
-function putcheck (req, body) {
-  console.log(req.user);
-  if (req.user.user_role == 0) {
-    [
-      body('name').not().isEmpty().trim().escape(),
-      body('birthdate').not().isEmpty().toDate(),
-      body('weight').not().isEmpty().isDecimal(),
-      body('owner').not().isEmpty().isInt()
-
-    ]
-  }
-  else {
-    [
-      body('name').not().isEmpty().trim().escape(),
-      body('birthdate').not().isEmpty().toDate(),
-      body('weight').not().isEmpty().isDecimal(),
-    ]
-  }
-}
-*/
 routerCatRoute.route('/:id')
   .get(catController.cat_get)
   .post(catController.cat_get)
@@ -90,16 +68,5 @@ routerCatRoute.route('/:id')
     ],
     catController.cat_update_put);
 
-//routerCatRoute.use('/cat', passport.authenticate('jwt', {session: false}), routerCatRoute);
-
-/*routerCatRoute.route('/catinfo')
-  .get((req, res) => {
-    const cat = {
-      name: 'Frank',
-      birthdate: '2010-12-25',
-      weight: 5,
-    };
-    res.json(cat);
-  });*/
 
 module.exports = routerCatRoute

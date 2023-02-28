@@ -38,7 +38,7 @@ const addCat = async (catname, catbirthdate, catweight, catowner, catfilename, c
   }
 };
 
-const changeCat = async (catname, catbirthdate, catweight, catid, catownerCurrent, userid, userrole) => {
+const changeCat = async (catname, catbirthdate, catweight, catowner, catid, catownerCurrent, userid, userrole) => {
   if (catownerCurrent == userid || userrole == 0) {
     try {
       if (userrole == 0) {
