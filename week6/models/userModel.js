@@ -37,10 +37,6 @@ const addUser = async (params) => {
   const useremail = params[1];
   const userpassword = params[2];
 
-  console.log(username);
-  console.log(useremail);
-  console.log(userpassword);
-
   try {
     const [rows] = await promisePool.execute('Insert into fs_user (name, email, password) values (?, ?, ?);', [username, useremail, userpassword]);
     return rows;

@@ -12,8 +12,7 @@ router.get('/logout', authController.logout);
 router.post('/register',
     [
       body('name', 'minimum 3 characters').isLength({min: 3}),
-      body(/*'username'*/'email', 'email is not valid').isEmail(),
-      body(/*'password'*/'passwd', 'at least one upper case letter').
+      body('passwd', 'at least one upper case letter').
           matches('(?=.*[A-Z]).{8,}'),
       sanitizeBody('name').escape(),
     ],
