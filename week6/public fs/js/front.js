@@ -5,9 +5,15 @@ const ul = document.querySelector('#list');
 
 const user = JSON.parse(sessionStorage.getItem('user'));
 
+//const addForm = document.querySelector('#addFileFormSearch');
+
+let search_input = document.getElementById('search_bar_front').value;
+
 const createFileCards = (files) => {
+
   ul.innerHTML = '';
   files.forEach((file) => {
+
     const img = document.createElement('img');
     img.src = url + '/uploads/' + file.filename;
     img.alt = file.name;
@@ -27,7 +33,7 @@ const createFileCards = (files) => {
     const li = document.createElement('li');
     li.classList.add('light-border');
 
-    li.appendChild(h2);
+    li.appendChild(h4);
     li.appendChild(figure);
     li.appendChild(p1);
     ul.appendChild(li);
@@ -68,10 +74,12 @@ const createFileCards = (files) => {
 
 const getFile = async () => {
   try {
+    //search_input
     const fetchOptions = {
       headers: {
         Authorization: 'Bearer ' + sessionStorage.getItem('token'),
       },
+      search_result: search_input,
     };
     const response = await fetch(url + '/file', fetchOptions);
     const files = await response.json();

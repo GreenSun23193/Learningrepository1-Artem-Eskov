@@ -34,12 +34,9 @@ passport.use(new JWTStrategy({
     secretOrKey   : 'your_jwt_secret'
 },
 function (jwtPayload, done) {
-    console.log("113");
-    console.log(jwtPayload);
-    console.log(jwtPayload.user_id);
     return getUser(jwtPayload.user_id)
         .then(user => {
-            console.log("user logged succesfully" + jwtPayload.user_id);
+            console.log("user logged succesfully:  " + jwtPayload.user_id);
             return done(null, user);
         })
         .catch(err => {

@@ -36,7 +36,6 @@ const user_create_post = async (req, res, next) => {
 
     const params = [
       req.body.name,
-      req.body.email,
       bcrypt.hashSync(req.body.passwd)
     ];
 

@@ -4,9 +4,8 @@ const promisePool = pool.promise();
 
 const getUserLogin = async (params) => {
   try {
-    console.log(params);
     const [rows] = await promisePool.execute(
-        'SELECT * FROM fs_user WHERE email = ?;',
+        'SELECT * FROM fs_user WHERE name = ?;',
         params);
     return rows;
   } catch (e) {
@@ -34,11 +33,10 @@ const getUser = async (id) => {
 
 const addUser = async (params) => {
   const username = params[0];
-  const useremail = params[1];
-  const userpassword = params[2];
+  const userpassword = params[1];
 
   try {
-    const [rows] = await promisePool.execute('Insert into fs_user (name, email, password) values (?, ?, ?);', [username, useremail, userpassword]);
+    const [rows] = await promisePool.execute('Insert into fs_user (name, password) values (?, ?);', [username, userpassword]);
     return rows;
   } catch (e) {
     console.error('error', e.message);

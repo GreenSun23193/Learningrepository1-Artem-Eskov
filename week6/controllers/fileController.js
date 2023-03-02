@@ -1,7 +1,6 @@
 'use strict';
 
 const fileModel = require('../models/fileModel.js');
-const resize = require('../utils/resize.js');
 var ExifImage = require('exif').ExifImage;
 
 const files = fileModel.files;
@@ -29,8 +28,7 @@ const file_post = async (req, res, next) => {
     return res.status(500).json({message: "File submitted incorrectly."});
   }
   try {
-    resize.makeThumbnail(req.file.path, "thumbnails/" + req.file.filename);
-    const file = await fileModel.addFile(req.body.name, req.body.description, req.user[0].user_id, req.file.filename);
+    const file = await fileModel.addFile(req.body.name, req.body.description, req.user[0].user_id, req.file.filename, req.file.mimetype);
     await res.json({message :"File upload has been succesful."})
   }
   catch (e) {
@@ -43,7 +41,7 @@ const file_update_put = async (req, res, next) => {
   const errorsUpdate = validationResult(req);
   if (!errorsUpdate .isEmpty())
   {
-    console.log(errorsUpdate );
+    console.log(errorsUpdate);
     return res.status(500).json({message: "File update has been unsuccesful."});
   }
   const thisFile = await fileModel.getFile(req.params.id);
@@ -61,11 +59,19 @@ const file_delete = async (req, res, next) => {
   fileModel.deleteFile(req.params.id, thisFile.owner, req.user[0].user_id, req.user[0].role)
 };
 
+const file_search = async (search_input, req, res, next) => {
+  const ret = await fileModel.getFileSearch(search_input);
+  console.log("file_search ret: ");
+  console.log(ret);
+  res.json(ret);
+};
+
 module.exports = {
   file_list_get,
   file_post,
   file_get,
   file_update_put,
   file_delete,
+  file_search,
 };
 

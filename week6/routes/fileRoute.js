@@ -14,7 +14,7 @@ const multer  = require('multer')
 const upload = multer({
   dest: 'uploads/',
   fileFilter: (req, file, cb) => {
-    if (file.mimetype == "image/*" || file.mimetype == "video/*" || file.mimetype == "audio/*") {
+    if (file.mimetype.startsWith("image/") || file.mimetype.startsWith("video/") || file.mimetype.startsWith("audio/")) {
       cb(null, true);
     } else {
       cb(null, false);
@@ -28,7 +28,8 @@ const files = fileModel.files;
 const fileController = require('../controllers/fileController.js');
 
 routerFileRoute.route('/')
-  .get(fileController.file_list_get)
+  //.get(fileController.file_list_get)
+  .get(fileController.file_search)
   .delete((req, res) => {
     res.send('File deletion.')
   })
@@ -36,8 +37,7 @@ routerFileRoute.route('/')
     upload.single('file'), 
     [
       body('name').not().isEmpty().trim().escape(),
-      body('birthdate').not().isEmpty().toDate(),
-      body('weight').not().isEmpty().isDecimal(),
+      body('description').not().isEmpty(),
       check('filename').custom((value, {req}) => {
         if(req.file.filename != ''){
             return true;
@@ -57,7 +57,6 @@ routerFileRoute.route('/:id')
   .put(
     upload.single('file'), 
     [
-      body('name').not().isEmpty().trim().escape(),
       body('description'),
       body('owner').optional().isInt()
     ],
