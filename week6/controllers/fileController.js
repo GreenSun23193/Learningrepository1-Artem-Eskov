@@ -44,14 +44,21 @@ const file_update_put = async (req, res, next) => {
     console.log(errorsUpdate);
     return res.status(500).json({message: "File update has been unsuccesful."});
   }
-  const thisFile = await fileModel.getFile(req.params.id);
-  if (req.user[0].role == 0) {
-      fileModel.changeFile(req.body.description, req.body.owner, req.params.id, thisFile.owner, req.user[0].user_id, req.user[0].role)
-    }
-    else {
-      fileModel.changeFile(req.body.description, "", req.params.id, thisFile.owner, req.user[0].user_id, req.user[0].role)
-    }
-  res.json({message: 'File changed!'});
+  try {
+    const thisFile = await fileModel.getFile(req.params.id);
+
+    if (req.user[0].role == 0) {
+        fileModel.changeFile(req.body.description, req.body.owner, req.params.id, thisFile.owner, req.user[0].user_id, req.user[0].role)
+      }
+      else {
+        fileModel.changeFile(req.body.description, "", req.params.id, thisFile.owner, req.user[0].user_id, req.user[0].role)
+      }
+    res.json({message: 'File changed!'});
+ }
+ catch(e) {
+  console.log('Something went wrong during the update.');
+  console.log('exif error', e);
+ }
 };
 
 const file_delete = async (req, res, next) => {
@@ -59,11 +66,17 @@ const file_delete = async (req, res, next) => {
   fileModel.deleteFile(req.params.id, thisFile.owner, req.user[0].user_id, req.user[0].role)
 };
 
-const file_search = async (search_input, req, res, next) => {
-  const ret = await fileModel.getFileSearch(search_input);
+const file_search = async (req, res, next) => {
+  try {
+  const ret = await fileModel.getFileSearch(req.params.str);
   console.log("file_search ret: ");
   console.log(ret);
   res.json(ret);
+}
+catch(e) {
+  console.log('Something went wrong with the search.');
+  console.log('exif error', e);
+ }
 };
 
 module.exports = {

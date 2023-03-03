@@ -29,7 +29,7 @@ const fileController = require('../controllers/fileController.js');
 
 routerFileRoute.route('/')
   //.get(fileController.file_list_get)
-  .get(fileController.file_search)
+  //.get(fileController.file_search(/*req.search_result*/""))
   .delete((req, res) => {
     res.send('File deletion.')
   })
@@ -49,6 +49,10 @@ routerFileRoute.route('/')
     ],
     fileController.file_post
   );
+
+routerFileRoute.route('/search/:str')
+//routerFileRoute.route('/:str')
+  .post(fileController.file_search);
 
 routerFileRoute.route('/:id')
   .get(fileController.file_get)

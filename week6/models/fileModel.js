@@ -22,8 +22,15 @@ const getFile = async (id) => {
 
 const getFileSearch = async (searchtext) => {
   try {
-    const [rows] = await promisePool.execute('SELECT * FROM fs_file WHERE ? in description or ? in name;', [searchtext, searchtext]);
-    return rows[0];
+    console.log('searchtext: ');
+    console.log(searchtext);
+    const [rows] = await promisePool.execute('Select * from fs_file where instr(name, ?) > 0 or instr(description, ?);', [searchtext, searchtext]);
+
+    console.log('getFileSearch rows: ');
+    console.log(rows);
+
+    //return rows[0];
+    return rows;
   } catch (e) {
     console.error('error', e.message);
   }

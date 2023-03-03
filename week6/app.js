@@ -39,11 +39,6 @@ const routerAppUser = require('./routes/userRoute.js')
 const passport = require('./utils/pass.js');
 const authRoute = require('./routes/authRoute.js');
 
-routerAppFile.route('/')
-  .get((req, res) => {
-    res.render('index.pug', { title: 'Title', heading: 'Click on the file', name: 'Name', age: 'Age: 7', weight: 'Weight 5kg' })
-  });
-
 app.use(passport.initialize());
 app.use('/auth', authRoute);
 
