@@ -19,9 +19,6 @@ const createFileCards = (files) => {
     var video_audio_source;
 
     if (file.file_type == 0) {
-
-      console.log("It's an image!");
-
       inserted_file_card = document.createElement('img');
       inserted_file_card.src = url + '/uploads/' + file.filename;
       inserted_file_card.alt = file.name;
@@ -34,9 +31,6 @@ const createFileCards = (files) => {
 
 
     else if (file.file_type == 1) {
-
-      console.log("It's a video!");
-
       inserted_file_card = document.createElement('video');
       video_audio_source = document.createElement('source');
       video_audio_source.src = url + '/uploads/' + file.filename;
@@ -52,13 +46,10 @@ const createFileCards = (files) => {
     }
 
     else if (file.file_type == 2) {
-
-      console.log("It's an audio!");
-
       inserted_file_card = document.createElement('audio');
       video_audio_source = document.createElement('source');
       video_audio_source.src = url + '/uploads/' + file.filename;
-  
+
       inserted_file_card.appendChild(video_audio_source);
       inserted_file_card.width = 200;
      
