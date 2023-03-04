@@ -48,16 +48,15 @@ const createFileCards = (files) => {
     else if (file.file_type == 2) {
       inserted_file_card = document.createElement('audio');
       video_audio_source = document.createElement('source');
+
       video_audio_source.src = url + '/uploads/' + file.filename;
 
+      
       inserted_file_card.appendChild(video_audio_source);
       inserted_file_card.width = 200;
      
       inserted_file_card.controls = true;
       inserted_file_card.classList.add('resp');
-      inserted_file_card.addEventListener('click', () => {
-      location.href = 'single.html?id=' + file.file_id;
-    });
     }
 
     else {
@@ -74,6 +73,12 @@ const createFileCards = (files) => {
 
     const li = document.createElement('li');
     li.classList.add('light-border');
+
+    /*if (file.file_type == 2) {
+      li.addEventListener('click', () => {
+        location.href = 'single.html?id=' + file.file_id;
+      });
+    }*/
 
     li.appendChild(h4);
     li.appendChild(figure);
