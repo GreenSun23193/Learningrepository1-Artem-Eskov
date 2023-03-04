@@ -28,8 +28,6 @@ const createFileCards = (files) => {
       });
     }
 
-
-
     else if (file.file_type == 1) {
       inserted_file_card = document.createElement('video');
       video_audio_source = document.createElement('source');

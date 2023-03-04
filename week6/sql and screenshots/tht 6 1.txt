@@ -81,12 +81,24 @@ https://localhost:8000/uploads/61ffe277ceb411be7d01a1aae2b0e62f
 https://localhost:8000/uploads/61ffe277ceb411be7d01a1aae2b0e62f
 
 
+git add .
+git commit -a -m 'week 6 save video single'
+git push origin week6
 
+git add .
+git commit -a -m 'week 6 no audio single page'
+git push origin week6
 
-- css
-- single page
-- audio click area
 - description text on single page
+- nav bar
+- text style
+- card style
+- buttons float down
+- div container
+- correct float for cards
+- max image size
+- audio description problem
+- login animation
 
 https://users.metropolia.fi/~artemes/public%20fs/front.html
 

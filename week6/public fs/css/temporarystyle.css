@@ -77,10 +77,9 @@ select {
   text-align: center;
   text-decoration: none;
 }
-
-/*video, audio {
-  controls;
-}*/
+a {
+  text-decoration: none;
+}
 
 
 
