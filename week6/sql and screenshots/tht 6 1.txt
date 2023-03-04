@@ -1,0 +1,130 @@
+git checkout -b week6
+
+add-file
+add-user
+front
+login
+logout
+
+File Saver
+
+fs_file
+- file_id
+- name
+- filename
+- description
+- file_type
+
+fs_user
+- user_id
+- name
+- password
+- role
+
+create database filesaverdatabase;
+use filesaverdatabase;
+
+Create table `fs_file` (
+`file_id` int(11) not null auto_increment,
+`name` text not null,
+`owner` int(11) not null,
+`filename` text not null,
+`description` text not null,
+`file_type` int(11) not null,
+primary key (file_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `fs_user` (
+  `user_id` int(11) NOT NULL auto_increment,
+  `name` text NOT NULL,
+  `password` text NOT NULL,
+  `role` int(1) NOT NULL DEFAULT 1,
+primary key (user_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+- user_role
+- database writing
+- database_metropolia
+- search
+
+Catcontroller
+
+cat wop
+
+git add .
+git commit -a -m 'week 6 save'
+git push origin week6
+
+0 - image
+1 - video
+2 - audio
+
+Random Guy
+RandomGuy1
+
+INSERT INTO fs_user (name, password, role)
+VALUES ("Admin 1", "admin1Admin", 0);
+
+New User
+newuser1USER
+
+Admin 1
+Admin1ADMIN
+
+Update fs_user set role = 0 where user_id = 1;
+
+Select * from fs_file where instr(name, ?) > 0 or instr(description, ?);
+
+https://localhost:8000/uploads/61ffe277ceb411be7d01a1aae2b0e62f
+https://localhost:8000/uploads/61ffe277ceb411be7d01a1aae2b0e62f
+
+
+
+
+- css
+- single page
+- audio click area
+- description text on single page
+
+https://users.metropolia.fi/~artemes/public%20fs/front.html
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

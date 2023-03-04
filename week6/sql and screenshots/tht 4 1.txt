@@ -1,0 +1,66 @@
+git checkout -b passport
+
+git add .
+git commit -a -m 'week4 beginning'
+git push origin passport
+
+nodemon app.js
+
+nodemon pass.js
+
+git checkout week3
+
+git checkout -b week4
+
+git checkout passport
+
+git checkout week4
+
+git add .
+git commit -a -m 'week4 middle'
+git push origin week4
+
+cd wop-assignments
+cd week2
+
+Greg
+hihihi@hellohello.com
+Hello2HiHello
+
+Alter table wop_user add user_role int not null default 1;
+
+Select * from wop_user;
+Select * from wop_cat;
+
+INSERT INTO wop_cat (name, weight, owner, filename)
+VALUES ("fat cat3", 5.5, 49, "wop_tht_1_1_3d.png");
+
+INSERT INTO wop_cat (name, weight, owner, filename)
+VALUES ("hello's fat cat", 5.5, 50, "wop_tht_1_1_3d.png");
+
+INSERT INTO wop_cat (name, weight, owner, filename)
+VALUES ("hello's thin cat", 5.5, 50, "wop_tht_1_1_3d.png");
+
+INSERT INTO wop_user (name, email, password, role, user_role)
+VALUES ("Administrator 1", "adminhihihi@hellohello.com", "Hello2HiHello", 0, 0);
+
+git add .
+git commit -a -m 'week4 ending'
+git push origin week4
+
+Metropolia University of Applied Sciences
+
+TVT21-M
+
+A challenge password
+eriq3e357gwwerfwef
+
+
+
+
+
+
+
+
+
+

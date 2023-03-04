@@ -1,0 +1,115 @@
+INSERT INTO wop_cat (name, weight, owner, filename)
+VALUES ("cat without a picture 1", 5.5, 50, "");
+
+INSERT INTO wop_cat (name, weight, owner, filename)
+VALUES ("cat without a picture 2", 5.5, 50, "no picture");
+
+INSERT INTO wop_cat (name, weight, owner, filename)
+VALUES ("cat without a picture 3", 5.5, 50, "wop_tht_4_1_1c.png");
+
+INSERT INTO wop_cat (name, weight, owner, filename)
+VALUES ("cat without a picture 4", 5.5, 50, "7a1337cdf0d2d5b0647788507efed64b");
+
+
+git add .
+git commit -a -m 'week4 ending. I save this before completing the first part of week 5'
+git push origin week4
+
+git checkout -b week5
+
+git add .
+git commit -a -m 'week5 beginning. I have decided to include HTTPS into this'
+git push origin week5
+
+Delete from wop_user where user_id <50;
+
+Update wop_user set password = "$2a$10$5RzpyimIeuzNqW7G8seBiOzBiWBvrSWroDomxMa0HzU6K2ddSgixS" where user_id = 50;
+
+Update wop_user set password = "$2a$10$H7bXhRqd68DjwFIVkw3G1OpfIdRWIRb735GvvzCBeuMhac/ZniGba" where user_id = 51;
+
+git add .
+git commit -a -m 'week5 middle'
+git push origin week5
+
+passwd
+
+AAAAAAAAAbbbbb11111
+
+Alter table wop_cat add coords varchar(255) default "";
+
+Update wop_cat set coords = '[24.74,60.24]';
+
+pk.eyJ1IjoiaWxra2FtdGsiLCJhIjoiY2szZ2Z3ZGtzMDFkZTNpcDh2aGFndmg2dyJ9.CjPq5lceUKhfdWD3oqhjwg
+
+qwer
+
+git add .
+git commit -a -m 'week5 ending'
+git push origin week5
+
+useradd newuser
+passwd Hejsan
+
+root password: Hejsannnnnn8
+
+newuser / newuser
+
+root password: Heysannnnnnn8
+
+
+ssh root@10.114.32.10
+
+root password
+BAAAAAC
+
+useradd newuser
+passwd newuser
+CAAAAAB
+
+ssh newuser@10.114.32.10
+
+AllowUsers newuser
+
+:q!
+
+195.148.98.22
+
+http://10.114.32.10
+http://195.148.98.22
+
+10.114.32.10/phpmyadmin
+195.148.98.22/phpmyadmin
+
+http://10.114.32.10/phpmyadmin
+http://195.148.98.22/phpmyadmin
+
+git clone https://github.com/NewUser324921/Learningrepository1
+
+cd Learningrepository1
+
+git checkout week6
+
+challenge password: 1111AAAAs
+
+git add .
+git commit -a -m 'virtual computer issues'
+git push origin week6
+
+git pull origin week6
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

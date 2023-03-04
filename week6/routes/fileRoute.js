@@ -29,7 +29,6 @@ const fileController = require('../controllers/fileController.js');
 
 routerFileRoute.route('/')
   //.get(fileController.file_list_get)
-  //.get(fileController.file_search(/*req.search_result*/""))
   .delete((req, res) => {
     res.send('File deletion.')
   })

@@ -1,0 +1,11 @@
+git config --global user.email "artemes@metropolia.fi"
+git config --global user.name "Git User"
+
+git remote add origin https://github.com/NewUser324921/Learningrepository1
+
+mkdir week1-node
+
+echo 'console.log("Hello world!");' > my-script.js
+
+echo 'console.log("Hello world! 2");' > my-script.js
+

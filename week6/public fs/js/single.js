@@ -14,7 +14,8 @@ var source_insert;
 
 const getFile = async (id) => {
   const fetchOptions = {
-    method: 'GET',
+    //method: 'GET',
+    method: 'POST',
     headers: {
       Authorization: 'Bearer ' + sessionStorage.getItem('token'),
     },
