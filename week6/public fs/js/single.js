@@ -43,6 +43,7 @@ const getFile = async (id) => {
     file_insert.style = "display:inherit";
     source_insert.style = "display:inherit";
     //file_insert.classList.add('resp');
+    file_insert.load();
   }
   else if (file.file_type == 2) {
     file_insert = document.querySelector('audio');
@@ -51,6 +52,7 @@ const getFile = async (id) => {
     file_insert.style = "display:inherit";
     source_insert.style = "display:inherit";
     //file_insert.classList.add('resp');
+    file_insert.load();
   }
   else{
     console.log("Something went wrong with getFile function.");
