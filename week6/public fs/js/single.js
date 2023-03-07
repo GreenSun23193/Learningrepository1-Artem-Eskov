@@ -12,9 +12,10 @@ const file_id = getQParam('id');
 var file_insert;
 var source_insert;
 
+var file_saved;
+
 const getFile = async (id) => {
   const fetchOptions = {
-    //method: 'GET',
     method: 'POST',
     headers: {
       Authorization: 'Bearer ' + sessionStorage.getItem('token'),
@@ -22,19 +23,20 @@ const getFile = async (id) => {
   };
   const response = await fetch(url + '/file/' + id, fetchOptions);
 
-  console.log("sigle.js response: ");
-  console.log(response);
-
   const file = await response.json();
-
-  console.log("sigle.js file: ");
-  console.log(file);
+  
+  file_saved = file;
 
   if (file.file_type == 0) {
     file_insert = document.querySelector('img');
     file_insert.src = url + '/uploads/' + file.filename;
     file_insert.style = "display:inherit";
-    //file_insert.classList.add('resp');
+
+    if (file.description != "" && file.description != null) {
+      file_insert.title = file.name;
+    }
+
+    file_insert.classList.add('resp');
   }
   else if (file.file_type == 1) {
     file_insert = document.querySelector('video');
@@ -42,23 +44,28 @@ const getFile = async (id) => {
     source_insert.src = url + '/uploads/' + file.filename;
     file_insert.style = "display:inherit";
     source_insert.style = "display:inherit";
-    //file_insert.classList.add('resp');
+    file_insert.classList.add('resp');
     file_insert.load();
   }
   else if (file.file_type == 2) {
     file_insert = document.querySelector('audio');
-    source_insert = document.querySelectorAll('source')[0];
+    source_insert = document.querySelectorAll('source')[1];
     source_insert.src = url + '/uploads/' + file.filename;
     file_insert.style = "display:inherit";
     source_insert.style = "display:inherit";
-    //file_insert.classList.add('resp');
+    file_insert.classList.add('resp');
     file_insert.load();
   }
   else{
     console.log("Something went wrong with getFile function.");
     return;
   }
-
 };
 
 getFile(file_id);
+
+function ContentInsert () {
+  var figcaptaken = document.getElementsByTagName('figcaption')[0];
+  figcaptaken.innerHTML = file_saved.description;
+  return;
+}

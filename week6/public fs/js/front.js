@@ -49,7 +49,6 @@ const createFileCards = (files) => {
 
       video_audio_source.src = url + '/uploads/' + file.filename;
 
-      
       inserted_file_card.appendChild(video_audio_source);
       inserted_file_card.width = 200;
      
@@ -65,6 +64,10 @@ const createFileCards = (files) => {
 
     const h4 = document.createElement('h4');
     h4.innerHTML = file.name;
+    
+    h4.addEventListener('click', () => {
+      location.href = 'single.html?id=' + file.file_id;
+      });
 
     const p1 = document.createElement('p');
     p1.innerHTML = `${file.description}`;
@@ -72,16 +75,18 @@ const createFileCards = (files) => {
     const li = document.createElement('li');
     li.classList.add('light-border');
 
-    /*if (file.file_type == 2) {
-      li.addEventListener('click', () => {
-        location.href = 'single.html?id=' + file.file_id;
-      });
-    }*/
+    var innerdiv = document.createElement('div');
+    innerdiv.classList.add('innerdiv');
 
-    li.appendChild(h4);
-    li.appendChild(figure);
-    li.appendChild(p1);
+    innerdiv.appendChild(h4);
+    innerdiv.appendChild(figure);
+    innerdiv.appendChild(p1);
+    li.appendChild(innerdiv);
     ul.appendChild(li);
+
+
+
+
     if (user.role === 0 || user.user_id === file.owner) {
       const modButton = document.createElement('a');
       modButton.innerHTML = 'Modify';
@@ -120,9 +125,6 @@ const createFileCards = (files) => {
 const getFile = async () => {
   try {
     let search_input = document.getElementById('search_bar_front').value;
-
-    console.log('front.js search_input: ');
-    console.log(search_input);
 
     var [files] = [];
     if (search_input == "" || search_input == null) {
