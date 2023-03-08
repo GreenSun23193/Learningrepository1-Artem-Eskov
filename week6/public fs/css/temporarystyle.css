@@ -15,8 +15,14 @@ body {
   border: 1px solid #ccc;
   padding: 1em;
   box-sizing: border-box;
+}
 
-  /*position: relative;*/
+.light-border-search {
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  padding: 1em;
+  box-sizing: border-box;
+  width: 30%;
 }
 
 ul {
@@ -28,7 +34,6 @@ ul {
 }
 
 li {
-  width: 30%;
   margin: 0.5em;
 }
 
@@ -78,9 +83,6 @@ select {
   border: 1px rgb(74, 74, 74) solid;
   text-align: center;
   text-decoration: none;
-
-  /*position: absolute;
-  bottom: 0;*/
 }
 a {
   text-decoration: none;
@@ -97,6 +99,7 @@ ul.upperbar {
 li.upperbar {
   float: left;
   margin: 0;
+  margin-right: 7%;
 }
 
 a.upperbar {
@@ -116,22 +119,8 @@ li a.upperbar:hover {
   overflow:auto;
 }
 
-
-/*#singlefile {
-  position: relative;
-  display: inline-block;
-  margin-top: 20px;
-}
-
-[title]:hover::after, [title]:after, [title] {
-  content: attr(title);
-  position: absolute;
-  top: -100%;
-  left: 0;
-}*/
-
 .innerdiv {
-  min-height: 300px;
+  min-height: 250px;
 }
 
 

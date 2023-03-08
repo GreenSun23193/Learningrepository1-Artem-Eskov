@@ -69,18 +69,16 @@ const createFileCards = (files) => {
       location.href = 'single.html?id=' + file.file_id;
       });
 
-    const p1 = document.createElement('p');
-    p1.innerHTML = `${file.description}`;
+    h4.title = `${file.description}`;
 
     const li = document.createElement('li');
-    li.classList.add('light-border');
+    li.classList.add('light-border-search');
 
     var innerdiv = document.createElement('div');
     innerdiv.classList.add('innerdiv');
 
     innerdiv.appendChild(h4);
     innerdiv.appendChild(figure);
-    innerdiv.appendChild(p1);
     li.appendChild(innerdiv);
     ul.appendChild(li);
 
