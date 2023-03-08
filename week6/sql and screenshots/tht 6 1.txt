@@ -89,16 +89,20 @@ git add .
 git commit -a -m 'week 6 no audio single page'
 git push origin week6
 
-- description text on single page
-- nav bar
-- text style
-- card style
-- buttons float down
-- div container
-- correct float for cards
-- max image size
-- audio description problem
-- login animation
+git add .
+git commit -a -m 'week 6 save'
+git push origin week6
+
+git add .
+git commit -a -m 'week 6 css'
+git push origin week6
+
+openssl genrsa -out ssl-key.pem 2048
+openssl req -new -key ssl-key.pem -out certrequest.csr
+openssl x509 -req -in certrequest.csr -signkey ssl-key.pem -out ssl-cert.pem
+
+challenge password: Hello1hello2
+challenge password: Hello1hello3
 
 https://users.metropolia.fi/~artemes/public%20fs/front.html
 

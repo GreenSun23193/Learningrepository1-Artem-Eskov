@@ -60,6 +60,8 @@ const createFileCards = (files) => {
       console.log("Wrong file type.");
     }
 
+    inserted_file_card.classList.add('filesizeclass');
+
     const figure = document.createElement('figure').appendChild(inserted_file_card);
 
     const h4 = document.createElement('h4');
@@ -70,6 +72,7 @@ const createFileCards = (files) => {
       });
 
     h4.title = `${file.description}`;
+    h4.classList.add('tosingle');
 
     const li = document.createElement('li');
     li.classList.add('light-border-search');
